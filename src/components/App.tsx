@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTasks } from '../hooks/useTasks.ts'; 
 import Filter from './Filter.tsx';
+import '../styles/App.scss'
 
 const App = () => {
   const { tasks, loading, error } = useTasks();  
@@ -17,16 +18,18 @@ const App = () => {
   });
 
   return (
-    <div>
-      <h1>Task List</h1>
-      <Filter setFilter={setFilter} />  
-      {filteredTasks.map((task) => (
-        <div key={task.id}>
-          <h3>{task.title}</h3>
-          <p>{task.completed ? 'Completed' : 'Not completed'}</p>
-        </div>
-      ))}
-    </div>
+    <div className="app-container">
+  <h1 className="app-header">Task List</h1>
+  <Filter setFilter={setFilter} />
+  <div className="app-content">
+    {filteredTasks.map((task) => (
+      <div className="task-item" key={task.id}>
+        <h3>{task.title}</h3>
+        <p>{task.completed ? 'Completed' : 'Not completed'}</p>
+      </div>
+    ))}
+  </div>
+</div>
   );
 };
 
